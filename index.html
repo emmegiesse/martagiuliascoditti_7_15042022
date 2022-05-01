@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang='fr'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Les petis plats</title>
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png"
+        href="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1620663918/icon_akzhyp.png" />
+    
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-shims.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free-v4-font-face.min.css" media="all" rel="stylesheet">
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet">
+
+    <link rel='stylesheet' href='./css/style.css'>
+</head>
+
+<body>
+    <!-- HEADER-->
+    <header>
+        <img src="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1619049061/logo-les-petits-plats_jagbwd.png"
+            alt="Les petits plats" />
+
+        <!-- SEARCH BAR-->
+            <form id='searchBar'>
+            <label for="searchBarInput"></label>
+            <input type="search" id="searchBarInput" placeholder="Rechercher une recette">
+            <i class="fa-solid fa-search"></i>
+            </form>
+
+        <!-- FILTER OPTIONS -->
+        <div id="filtersBar">
+
+            <div id="ingredients">
+                <button>Ingrédients <i class="fas fa-chevron-down" id='openIngredientsFilter'></i></button>
+                <div id='hiddenIngredientsFilter'>
+                    <label for="inputIngredients"></label>
+                    <input type="search" id="inputIngredients" placeholder="Rechercher un ingrédient">
+                    <i class="fas fa-chevron-up" id="closeIngredientsFilter"></i>
+                    <div id='ingredientsExample'></div>
+                </div>
+            </div>
+
+            <div id="appliances">
+                <button>Appareils  <i class="fas fa-chevron-down" id='openAppliancesFilter'></i></button>
+                <div id='hiddenAppliancesFilter'>
+                    <label for="inputAppliances"></label>
+                    <input type="search" id="inputAppliances" placeholder="Rechercher un appareil ">
+                    <i class="fas fa-chevron-up" id="icloseAppliancesFilter"></i>
+                    <div id='appliancesExample'></div>
+                </div>
+            </div>
+
+            <div id="ustensils">
+                <button>Ustensiles <i class="fas fa-chevron-down" id='openUstensilsFilter'></i></button>
+                <div id='hiddenUstensilsFilter'>
+                    <label for="inputUstensils"></label>
+                    <input type="search" id="inputUstensils" placeholder="Rechercher un ustensile">
+                    <i class="fas fa-chevron-up" id="closeUstensilsFilter"></i>
+                    <div id='ustensilsExample'></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- RECIPES-->
+    <main id="recipesGallery">
+    </main>
+
+    <script src='./data/recipes.js'></script>
+    <script src="scripts/factories/recipes.js"></script>
+    <script src="scripts/pages/index.js"></script>
+
+</body>
+</html>
