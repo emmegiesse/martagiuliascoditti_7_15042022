@@ -140,6 +140,62 @@ header img {
 }
 
 /* mise en forme des recettes */
+#recipeGallery {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin: 0;
+}
 
+.recipeArticle {
+	background-color: #E7E7E7;
+	border-radius: .3125rem;
+	height: auto;
+	margin-bottom: 2.5rem;
+	overflow: hidden;
+	position: relative;
+	text-overflow: ellipsis;
+	width: 22rem;
+}
 
+.recipeCard {
+    display: flex;
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
 
+.recipeIngredients {
+    font-size: .8rem;
+	margin: .125rem 0;
+}
+
+.recipeIngredients
+.recipeMethod {
+    display: flex;
+    font-size: .8rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 50%;
+}
+
+.recipeTitle {
+	align-items: center;
+	background-color: #E7E7E7;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.recipeTitle h2
+.recipeTitle span {
+	font-size: 1.2rem;
+	font-weight: 700;
+}
+
+.recipeTitle span i {
+	margin-right: .3rem;
+}
