@@ -1,13 +1,3 @@
-// Récupère et crée la gallerie des recettes - réf fonction dans /factories_function/recipes.js
-function displayData(recipes) {
-    const recipesSection = document.getElementById('recipesGallery');
-    recipesSection.innerHTML = "";
-    recipes.forEach((recipes) => {
-        const recipesModel = recipesFactory(recipes);
-        const recipesCardDOM = recipesModel.getRecipeCardDOM(recipesSection);
-    });
-};
-
 // Définition de la fonction search -- > récupere seulement les recettes filtrées dans la barre principale
 function search (recipes, word) {
     let recipesFilter = [];
@@ -33,50 +23,39 @@ function search (recipes, word) {
 function init() {
     // Récupère les datas des recettes avec une recherche dans la barre principale
     displayData(recipes);
+
     getAllIngredients(recipes);
+    let ingredientsMatch = getAllIngredients(recipes);
+    displayIngredients(ingredientsMatch);
+
     getAllAppliances(recipes);
     getAllUstensils(recipes);
+
     const searchBar = document.getElementById('searchBarInput');
     searchBar.onchange = function (event) {
-        console.log(event.target.value);
-        const word = event.target.value; 
+        //console.log(event.target.value);
+        const word = event.target.value;
+        let hiddenIngredientsFilter = document.getElementById('hiddenIngredientsFilter')
+        hiddenIngredientsFilter.style.display = 'none'
+
         if (word.length >= 3) {
             let recipesFilter = search (recipes, word);
             displayData(recipesFilter);
-            console.log(recipesFilter)
-            console.log(recipesFilter.length)
+            //console.log(recipesFilter)
+            //console.log(recipesFilter.length)
             let ingredientsMatch = getAllIngredients(recipesFilter);
-            fillIngredients(ingredientsMatch);
+            displayIngredients(ingredientsMatch, searchRecipes);
+            console.log(ingredientsMatch);
+
             getAllAppliances(recipesFilter);
             getAllUstensils(recipesFilter);
-            console.log(getAllIngredients)
+            //console.log(getAllIngredients)
         }
         else {
             displayData(recipes);
-            
         }
     }
 };
-
-/*
-cons button 
-let ingredientsExample = document.getElementById('ingredientsExample');
-
-function fillIngredients(ingredients) {
-    let ul = document.createElement('ul');
-    ul.classList.add('listUlIng');
-    this.ingredientsExample.appendChild(ul);
-
-    ingredients.forEach((ingredient) => {
-        let listIngredients = document.createElement('li');
-        
-        ul.appendChild(listIngredients);
-        listIngredients.innerHTML = `${Utils.upperText(ingredient)}`
-        listIngredients.classList.add('list-ingredients');
-        listIngredients.setAttribute('data-filter', `${ingredient}`);
-    });
-}
-*/
 
 init()
 
