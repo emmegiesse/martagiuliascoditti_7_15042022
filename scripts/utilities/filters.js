@@ -7,7 +7,7 @@ function getAllIngredients(recipes) {
                     ingredients.push(ing.ingredient);
             });
         });
-        console.log(ingredients);
+        //console.log(ingredients);
     return ingredients;
 };
 
@@ -18,7 +18,7 @@ function getAllAppliances(recipes) {
                 if (!appliances.includes(recipe.appliance))
                     appliances.push(recipe.appliance);
             });
-        console.log(appliances);
+        //console.log(appliances);
     return appliances;
 };
 
@@ -31,6 +31,7 @@ function getAllUstensils(recipes) {
                 ustensils.push(ustensil);
         });
     });
-    console.log(ustensils);
+    //console.log(ustensils);
     return ustensils;
 }
+

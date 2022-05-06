@@ -27,4 +27,15 @@ function recipesFactory(data) {
 
 }
 
+// Récupère et crée la gallerie des recettes - réf fonction dans /factories_function/recipes.js
+function displayData(recipes) {
+    const recipesSection = document.getElementById('recipesGallery');
+    recipesSection.innerHTML = "";
+    recipes.forEach((recipes) => {
+        const recipesModel = recipesFactory(recipes);
+        const recipesCardDOM = recipesModel.getRecipeCardDOM(recipesSection);
+    });
+};
+
+
 
