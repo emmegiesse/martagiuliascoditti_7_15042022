@@ -1,62 +1,48 @@
-// Définition de la fonction search -- > récupere seulement les recettes filtrées dans la barre principale
-function search (recipes, word) {
-    let recipesFilter = [];
-    for (let i = 0; i < recipes.length; i++) {
-        if (recipes[i].name.toLowerCase().includes(word.toLowerCase())
-        ||recipes[i].description.toLowerCase().includes(word.toLowerCase()))
-        //||recipes[i].ingredients.some(elt => elt.ingredient.toLowerCase().includes(word))) 
-        {recipesFilter.push(recipes[i])
-        }
-        else {
-            let isAdded = false;
-            for (let j=0; j < recipes[i].ingredients.length ; j++){
-                if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(word.toLowerCase())&&isAdded==false){
-                    isAdded = true;
-                    recipesFilter.push(recipes[i])
-                }
-            }
-        }
-    }
-    return recipesFilter;
-};
-
 function init() {
-    // Récupère les datas des recettes avec une recherche dans la barre principale
-    displayData(recipes);
+    displayData(recipes); // affiche toutes les recettes -- > factories/recipes.js
+    
+    getIngredients(recipes); // crée un tableau avec tous les ingredients -- > utilities/ingredients.js
+    let ingredientsAll = getIngredients(recipes); 
+    //console.log(ingredientsAll)
+    displayIngredients(ingredientsAll); // crée il dropdown des ingredients pour toutes les recettes -- > factories/ingredients.js
+    searchInput(ingredientsAll);
 
-    getAllIngredients(recipes);
-    let ingredientsMatch = getAllIngredients(recipes);
-    displayIngredients(ingredientsMatch);
+   /* getAppliances(recipes); // crée un tableau avec tous les appareils -- > utilities/appliances.js
+    let appliancesAll = getAppliances(recipes); 
+    //console.log(appliancesAll)
+    displayAppliances(appliancesAll); // crée il dropdown des appareils pour toutes les recettes -- > factories/appliances.js
+    searchInput(appliancesAll);
+    */
 
-    getAllAppliances(recipes);
-    getAllUstensils(recipes);
+    /*
+    getUstensils(recipes); // crée un tableau avec tous les ustensiles -- > utilities/ustensils.js
+    let ustensilsAll = getUstensils(recipes); 
+    console.log(ustensilsAll)
+    displayUstensils(ustensilsAll); // crée il dropdown des ustensiles pour toutes les recettes -- > factories/ustensils.js
+    searchInput(usensilsAll);
+    */
 
-    const searchBar = document.getElementById('searchBarInput');
+    // Appel de la fonction de recherche dans la barre principale -- > utilities/search.js
+    const searchBar = document.getElementById('searchBarInput');  
     searchBar.onchange = function (event) {
         //console.log(event.target.value);
-        const word = event.target.value;
-        let hiddenIngredientsFilter = document.getElementById('hiddenIngredientsFilter')
-        hiddenIngredientsFilter.style.display = 'none'
+        const input = event.target.value;
 
-        if (word.length >= 3) {
-            let recipesFilter = search (recipes, word);
-            displayData(recipesFilter);
-            //console.log(recipesFilter)
-            //console.log(recipesFilter.length)
-            let ingredientsMatch = getAllIngredients(recipesFilter);
-            displayIngredients(ingredientsMatch, searchRecipes);
-            console.log(ingredientsMatch);
+        if (input.length >= 2) { // demarre la recherche après 2 caractères
+            let recipesMatch = mainSearch (recipes, input); 
+            displayData(recipesMatch); // affiche les recettes filtrées -- > factories/recipes.js
+            //console.log(recipesMatch)
 
-            getAllAppliances(recipesFilter);
-            getAllUstensils(recipesFilter);
-            //console.log(getAllIngredients)
+            let ingredientsMatch = getIngredients(recipesMatch); // crée un tableau avec tous ingredeints des recettes filtrées -- > utilities/filters.js
+            displayIngredients(ingredientsMatch); // crée le dropdown des ingredeints des recettes filtrées -- > factories/filters.js
+            //console.log(ingredientsMatch);
+            searchInput(ingredientsMatch);
+            displayData(recipesMatch);
         }
         else {
             displayData(recipes);
         }
-    }
+    };
 };
 
-init()
-
-
+init() //appelle la function init

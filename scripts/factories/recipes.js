@@ -1,8 +1,17 @@
-function recipesFactory(data) {
-    const { id, name, servings, ingredients, ingredient, quantity, unit, time, description, appliance, ustensils } = data ;
+// Récupère et crée la gallerie des recettes --> appelée dans index.js --> OK
+function displayData(recipes) {
+    const recipesSection = document.getElementById('recipesGallery');
+    clear (recipesSection) //.innerHTML=""
+    recipes.forEach((recipes) => {
+        const recipesModel = recipesFactory(recipes);
+        const recipesCardDOM = recipesModel.getRecipeCardDOM(recipesSection);
+    });
+};
 
+// Création de la card de la recette dans le DOM --> OK
+function recipesFactory(data) { 
+    const { id, name, servings, ingredients, ingredient, quantity, unit, time, description, appliance, ustensils } = data ;
     function getRecipeCardDOM(recipesSection) {
-        
         recipesSection.innerHTML += `   
             <article class='recipeArticle'>
                 <div class='recipeCard'>
@@ -14,28 +23,13 @@ function recipesFactory(data) {
                         <p><b>${elt.ingredient} </b>:
                         ${ 'quantity' in elt ? elt.quantity : ''}
                         ${ 'unit' in elt ? elt.unit: ''}</p>`).join(' ')}
-                    </div>
-                    <div class='recipeMethod'>
-                        <span>${description}</span>
-                    </div>
-                </div>  
-            </article>    
-        `
+                        </div>
+                        <div class='recipeMethod'>
+                            <span>${description}</span>
+                        </div>
+                    </div>  
+                </article>    
+            `
+        }
+        return {getRecipeCardDOM}
     }
-
-    return {getRecipeCardDOM}
-
-}
-
-// Récupère et crée la gallerie des recettes - réf fonction dans /factories_function/recipes.js
-function displayData(recipes) {
-    const recipesSection = document.getElementById('recipesGallery');
-    recipesSection.innerHTML = "";
-    recipes.forEach((recipes) => {
-        const recipesModel = recipesFactory(recipes);
-        const recipesCardDOM = recipesModel.getRecipeCardDOM(recipesSection);
-    });
-};
-
-
-

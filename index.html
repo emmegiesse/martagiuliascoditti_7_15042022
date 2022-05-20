@@ -24,11 +24,18 @@
             alt="Les petits plats" />
 
         <!-- SEARCH BAR-->
-            <form id='searchBar'>
+            <form id='searchBar' method='post'>
             <label for="searchBarInput"></label>
             <input type="search" id="searchBarInput" placeholder="Rechercher une recette">
-            <i class="fa-solid fa-search"></i>
+            <i class="fas fa-search"></i>
             </form>
+
+        <!-- BADGES --> 
+        <nav id="tagsBar">
+            <span id="ingredientTag"></span>
+            <span id="appareilTag"></span>
+            <span id="ustensileTag"></span>
+        </nav>  
 
         <!-- FILTER OPTIONS -->
         <div id="filtersBar">
@@ -39,7 +46,7 @@
                     <label for="inputIngredients"></label>
                     <input type="search" id="inputIngredients" placeholder="Rechercher un ingrédient">
                     <i class="fas fa-chevron-up" id="closeIngredientsFilter"></i>
-                    <div id='ingredientsExample'></div>
+                    <div id='ingredientsList'></div>
                 </div>
             </div>
 
@@ -49,7 +56,7 @@
                     <label for="inputAppliances"></label>
                     <input type="search" id="inputAppliances" placeholder="Rechercher un appareil ">
                     <i class="fas fa-chevron-up" id="icloseAppliancesFilter"></i>
-                    <div id='appliancesExample'></div>
+                    <div id='appliancesList'></div>
                 </div>
             </div>
 
@@ -59,7 +66,7 @@
                     <label for="inputUstensils"></label>
                     <input type="search" id="inputUstensils" placeholder="Rechercher un ustensile">
                     <i class="fas fa-chevron-up" id="closeUstensilsFilter"></i>
-                    <div id='ustensilsExample'></div>
+                    <div id='ustensilsList'></div>
                 </div>
             </div>
         </div>
@@ -69,11 +76,20 @@
     <main id="recipesGallery">
     </main>
 
-    <script src="scripts/utilities/utils.js"></script>
     <script src='./data/recipes.js'></script>
+
+    <script src="scripts/utilities/utils.js"></script>
+    <script src="scripts/utilities/ingredients.js"></script>
+    <script src="scripts/utilities/appliances.js"></script>
+    <script src="scripts/utilities/ustensils.js"></script>
+    <script src="scripts/utilities/search.js"></script>
+
+    <script src="scripts/factories/tags.js"></script>
     <script src="scripts/factories/recipes.js"></script>
-    <script src="scripts/factories/filters.js"></script>
-    <script src="scripts/utilities/filters.js"></script>
+    <script src="scripts/factories/ingredients.js"></script>
+    <script src="scripts/factories/appliances.js"></script>
+    <script src="scripts/factories/ustensils.js"></script>
+    
     <script src="scripts/pages/index.js"></script>
 
 </body>
