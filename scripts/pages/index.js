@@ -29,7 +29,7 @@ function init() {
         const input = event.target.value;
 
         if (input.length >= 2) { // demarre la recherche après 2 caractères
-            let recipesMatch = mainSearch (recipes, input); 
+            recipesMatch = mainSearch (recipes, input); 
             displayData(recipesMatch); // affiche les recettes filtrées -- > factories/recipes.js
             //console.log(recipesMatch)
 

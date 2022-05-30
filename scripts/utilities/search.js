@@ -53,21 +53,39 @@ function searchInput(ingredients, appliances, ustensils) {
             fillIngredients (ingredients)
         }
     }
+}
 
 // recherche pour tag des ingredients 
 function searchByIngTags(recipes, tagIng) {
     let resultIng = [];
     for (let i = 0; i < recipes.length; i++) {
-        if (recipes[i].ingredients.includes(tagIng)){
-        /*recipes.forEach(recipe => {
-        if (recipe.ingredients.some(elt => normalizeText(elt.ingredient).includes(tagIng))) {*/
-            resultIng.push(recipe);
-        }
-    }; 
-    //console.log(resultIng)
-    return resultIng;
- }
-
-
-
-}
+        //console.log(recipes[i].ingredients)
+        let currentIngredients = recipes[i].ingredients;
+        let numbers = 0;
+        currentIngredients.forEach(
+            ing => {
+                let currentIng = ing.ingredient.replace(/\s/g,"");
+                if (
+                    tagIng.includes(currentIng)
+                    )
+                    {numbers++;
+                    }
+                }
+                )
+                if (
+                    numbers == tagIng.length 
+                    )
+                    {
+                        resultIng.push(recipes[i]);
+                    }
+                }; 
+                console.log(resultIng)
+                //console.log(recipes)
+                console.log(tagIng)
+                return resultIng;
+            }
+            
+            
+            
+            
+            

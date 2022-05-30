@@ -30,11 +30,13 @@ function fillIngredients(ingredients) {
     el.onclick = () => {
         let ingredientTag = document.getElementById('ingredientTag');
         //buildTags (ingredientTag, el.textContent);
-        ingredientTagSelect.push(el.textContent)
+        let tagWithoutSpace = el.textContent.replace(/\s/g,"");
+        ingredientsTagSelect.push(tagWithoutSpace);
         buildTags (ingredientTag, el.textContent, "ingredients");
         //console.log(selectedIngTag);
         //tagsBar.innerHTML += selectedIngTag;
-        search (ingredientsTagSelect);
+        recipeMatch = searchByIngTags(recipesMatch, ingredientsTagSelect);
+        displayData (recipeMatch);
     }
     });
 

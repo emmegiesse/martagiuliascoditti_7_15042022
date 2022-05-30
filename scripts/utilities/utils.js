@@ -1,3 +1,5 @@
+let recipesMatch = recipes;
+
 function clear (funct) { //function pour vider
     funct.innerHTML = "";
 }

@@ -21,9 +21,6 @@ function buildTags(elt, tag, collection) {
         let chipTag = document.getElementById(`chip-${onlyId}`)
         //console.log(chipTag)
         chipTag.style.display = "none";
-        ingredientTagSelect.findIndex ()
-        .slice
-        
         }
     });
     return elt;
