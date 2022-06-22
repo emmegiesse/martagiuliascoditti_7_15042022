@@ -1,12 +1,17 @@
 let recipesMatch = recipes;
+//console.log(recipesMatch);
 
-function clear (funct) { //function pour vider
-    funct.innerHTML = "";
-}
+let ingredients = [];
+let appliances = [];
+let ustensils = [];
 
 function normalizeText(text) {
     return text
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
+}
+
+function clear(el) {
+    el.innerHTML = "";
 }

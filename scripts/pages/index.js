@@ -1,48 +1,37 @@
 function init() {
-    displayData(recipes); // affiche toutes les recettes -- > factories/recipes.js
+    displayRecipes(recipes);
+    let ingredients = ingDisplay(recipes);
+    let appliances = appDisplay(recipes);
+    let ustensils = ustDisplay(recipes);
     
-    getIngredients(recipes); // crée un tableau avec tous les ingredients -- > utilities/ingredients.js
-    let ingredientsAll = getIngredients(recipes); 
-    //console.log(ingredientsAll)
-    displayIngredients(ingredientsAll); // crée il dropdown des ingredients pour toutes les recettes -- > factories/ingredients.js
-    searchInput(ingredientsAll);
-
-   /* getAppliances(recipes); // crée un tableau avec tous les appareils -- > utilities/appliances.js
-    let appliancesAll = getAppliances(recipes); 
-    //console.log(appliancesAll)
-    displayAppliances(appliancesAll); // crée il dropdown des appareils pour toutes les recettes -- > factories/appliances.js
-    searchInput(appliancesAll);
-    */
-
-    /*
-    getUstensils(recipes); // crée un tableau avec tous les ustensiles -- > utilities/ustensils.js
-    let ustensilsAll = getUstensils(recipes); 
-    console.log(ustensilsAll)
-    displayUstensils(ustensilsAll); // crée il dropdown des ustensiles pour toutes les recettes -- > factories/ustensils.js
-    searchInput(usensilsAll);
-    */
-
-    // Appel de la fonction de recherche dans la barre principale -- > utilities/search.js
-    const searchBar = document.getElementById('searchBarInput');  
-    searchBar.onchange = function (event) {
-        //console.log(event.target.value);
-        const input = event.target.value;
-
-        if (input.length >= 2) { // demarre la recherche après 2 caractères
-            recipesMatch = mainSearch (recipes, input); 
-            displayData(recipesMatch); // affiche les recettes filtrées -- > factories/recipes.js
+    searchBarInput.onchange = function (event) { // Fonction de recherche dans la barre principale
+        const inputMain = event.target.value;
+        if (inputMain.length >= 2) { // demarre la recherche après 2 caractères
+            recipesSection.innerHTML = "";
+            recipesMatch = mainSearch (recipes, inputMain); 
+            displayRecipes(recipesMatch); // affiche les recettes filtrées avec l"input dans la barre principale
             //console.log(recipesMatch)
-
-            let ingredientsMatch = getIngredients(recipesMatch); // crée un tableau avec tous ingredeints des recettes filtrées -- > utilities/filters.js
-            displayIngredients(ingredientsMatch); // crée le dropdown des ingredeints des recettes filtrées -- > factories/filters.js
-            //console.log(ingredientsMatch);
-            searchInput(ingredientsMatch);
-            displayData(recipesMatch);
         }
         else {
-            displayData(recipes);
+            displayRecipes(recipes);
+            recipesMatch = recipes; // affiche toutes les recettes
         }
-    };
-};
 
-init() //appelle la function init
+        ingredients = ingDisplay(recipesMatch);
+        appliances = appDisplay(recipesMatch);
+        ustensils = ustDisplay(recipesMatch);
+    }
+
+    arrows.forEach(arrow => arrow.addEventListener("click", openDropdown)); // Affichage du menu de dropdown au clic du chevron
+    ingInputFilter.addEventListener("input", openDropdown, searchInput()); // Affichage du menu dropdown à l'écriture d'un texte dans la barre du filtre ingredients et lance la recherche
+    appInputFilter.addEventListener("input", openDropdown, searchInput()); // Affichage du menu dropdown à l'écriture d'un texte dans la barre du filtre appareils et lance la recherche   
+    ustInputFilter.addEventListener("input", openDropdown, searchInput()); // Affichage du menu dropdown à l'écriture d'un texte dans la barre du filtre ustensils et lance la recherche
+    
+    ingredients = ingDisplay(recipesMatch);
+    appliances = appDisplay(recipesMatch);
+    ustensils = ustDisplay(recipesMatch);
+    console.log (ingredients, appliances, ustensils)
+
+}
+
+init();

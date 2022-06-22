@@ -1,18 +1,42 @@
-// déclaration des constantes
-let hiddenIngredientsFilter = document.getElementById("hiddenIngredientsFilter")
-let ingredientsList = document.getElementById("ingredientsList");
+//Eléments du DOM
+const ingList = document.querySelector(".ingredientsList");
 let ingredientsTagSelect = [];
 
-// récupère les ingredients et crée les éléments du dropdown --> OK
-function fillIngredients(ingredients) {
-    //console.log(ingredients)
-    hiddenIngredientsFilter.style.display = "block";
-    clear(ingredientsList);
+function ingDisplay (recipesOn) {
+    console.log("ingDisplay")
+    let ingMatch = getIngredients(recipesOn); // crée un tableau avec les ingredients
+    ingredientsListDOM(ingMatch); // crée il dropdown des ingredients
+    //console.log(ingMatch); 
+}
 
+//Function pour récupère les ingredients des recettes 
+function getIngredients(recipes) { 
+    //console.log(recipes);
+    let ingredients = [];
+    recipes.forEach((recipe) => {
+        recipe.ingredients.forEach((ing) => {
+            if (!ingredients.includes(ing.ingredient))
+            ingredients.push(ing.ingredient);
+        });
+    });
+    //console.log(ingredients);
+    return ingredients;
+};
+
+// récupère les ingredients et crée les éléments du dropdown
+function ingredientsListDOM (ingredients) {
+    //console.log(ingredients);
+    ingList.style.display = "none";
     let ul = document.createElement("ul");
     ul.setAttribute("class","listIng");
-    ingredientsList.appendChild(ul);
+    ingList.innerHTML = "";
+    ingList.appendChild(ul); 
 
+    if (ingredientsTagSelect.length > 0){
+        ingredients = ingredients.filter((el) => !ingredientsTagSelect.includes(el.replace(/\s/g,"")))
+    }
+    console.log(ingredients);
+    console.log(ingredientsTagSelect);
     ingredients.forEach((ingredient) => {
         let listIngredients = document.createElement("li");
         listIngredients.setAttribute("class","ingListItem")
@@ -26,47 +50,19 @@ function fillIngredients(ingredients) {
     //console.log(Array.from(btnIngredients))
 
     arrayBtnIngredients.forEach ((el)=> {
-    //console.log(el.textContent)
-    el.onclick = () => {
-        let ingredientTag = document.getElementById('ingredientTag');
-        //buildTags (ingredientTag, el.textContent);
-        let tagWithoutSpace = el.textContent.replace(/\s/g,"");
-        ingredientsTagSelect.push(tagWithoutSpace);
-        buildTags (ingredientTag, el.textContent, "ingredients");
-        //console.log(selectedIngTag);
-        //tagsBar.innerHTML += selectedIngTag;
-        recipeMatch = searchByIngTags(recipesMatch, ingredientsTagSelect);
-        displayData (recipeMatch);
-    }
-    });
-
-    // Recherche par tag
-function filterTags(recipes) {
-    let selected = [];
-    let ingredientTag = document.getElementById('ingredientTag');
-
-    document.querySelector('#ingredientsList').addEventListener('click', (event) => {
-        let classValue = event.target.classList.value;
-
-        if (-1 === classValue.indexOf('selected')) {
-            event.target.classList.add('selected');
-            selected.push(event.target.getAttribute('data-filter'));
-            
-            hideButtonsOnClick(document.querySelector("#ingredients > button"),
-                document.querySelector("#openIngredientsFilter"),
-                document.querySelector("#hiddenIngredientsFilter"))
-
-            //buildTags(ingredientTag, event.target.getAttribute('data-filter'));
-            //removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
-            //document.getElementById('mainContent').innerHTML = ''; //clearRecipesSection
-            /*let result = searchByIngTags(recipes, selected);
-            displayData(result);
-            ingredientsList.innerHTML = ''; 
-            fillIngredients (getAllIngredients(result));*/
-        } else {
-            resetSection(event, ingredientTag, recipes);
-        };
-    });
-    return selected;
-}
-}
+        //console.log(el.textContent)
+        el.onclick = () => {
+            let tagWithoutSpace = el.textContent.replace(/\s/g,"");
+            //console.log(tagWithoutSpace);
+            ingredientsTagSelect.push(tagWithoutSpace);
+            console.log(ingredientsTagSelect)
+            buildTags (tagsBar, el.textContent, "ingredients", ingredientsTagSelect);
+            recipesMatch = searchByIngTags(recipesMatch, ingredientsTagSelect);
+            //console.log(recipesMatch);
+            displayRecipes (recipesMatch);
+            //getIngredients(recipesMatch);
+            ingDisplay (recipesMatch);
+        }
+    })
+    return recipesMatch;
+};
