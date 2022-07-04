@@ -1,5 +1,4 @@
 let recipesMatch = recipes;
-//console.log(recipesMatch);
 
 let ingredients = [];
 let appliances = [];

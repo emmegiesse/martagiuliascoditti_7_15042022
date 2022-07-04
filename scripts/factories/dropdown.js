@@ -2,7 +2,6 @@
 const arrows = document.querySelectorAll(".fas");
 
 function closeDropdown(event) { //fonction de fermeture du dropdown
-    //console.log (event.target.parentNode.parentNode)
     const arrowFromfilterOn = event.target.parentNode.parentNode.querySelector(".fas");
     const filterTag = event.target.parentNode.parentNode.querySelector(".listToTags");
     const filterOn = event.target.parentNode.parentNode;

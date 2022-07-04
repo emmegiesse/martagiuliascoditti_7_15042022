@@ -21,7 +21,6 @@ function init() {
               }
             else{
                 displayRecipes(recipesMatch); // affiche les recettes filtrées avec l"input dans la barre principale
-                console.log(recipesMatch)
             }
         }
         else {

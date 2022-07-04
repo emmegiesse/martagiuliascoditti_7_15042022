@@ -5,12 +5,10 @@ let ingredientsTagSelect = [];
 function ingDisplay (recipesOn) {
     let ingMatch = getIngredients(recipesOn); // crée un tableau avec les ingredients des recettes affichées
     ingredientsListDOM(ingMatch); // crée il dropdown des ingredients
-    //console.log(ingMatch); 
 }
 
 //Function pour récupère les ingredients des recettes 
 function getIngredients(recipes) { 
-    //console.log(recipes);
     let ingredients = [];
     recipes.forEach((recipe) => {
         recipe.ingredients.forEach((ing) => {
@@ -18,13 +16,11 @@ function getIngredients(recipes) {
             ingredients.push(ing.ingredient);
         });
     });
-    //console.log(ingredients);
     return ingredients;
 };
 
 // récupère les ingredients et crée les éléments du dropdown
 function ingredientsListDOM (ingredients) {
-    //console.log(ingredients);
     ingList.style.display = "none";
     let ul = document.createElement("ul");
     ul.setAttribute("class","listIng");
@@ -35,8 +31,6 @@ function ingredientsListDOM (ingredients) {
     if (ingredientsTagSelect.length > 0) {
         ingredients = ingredients.filter((el) => !ingredientsTagSelect.includes(el.replace(/\s/g,"")))
     }
-    //console.log(ingredients);
-    //console.log(ingredientsTagSelect);
 
     ingredients.forEach((ingredient) => { // création de la liste des ingrédients du dropdown
         let listIngredients = document.createElement("li");
@@ -48,17 +42,12 @@ function ingredientsListDOM (ingredients) {
 
     const btnIngredients = document.getElementsByClassName ("ingChoiseListToTag");      
     const arrayBtnIngredients = Array.from(btnIngredients);
-    //console.log(Array.from(btnIngredients))
     arrayBtnIngredients.forEach ((el)=> {
-        //console.log(el.textContent)
         el.onclick = () => {
             let tagWithoutSpace = el.textContent.replace(/\s/g,"");
-            //console.log(tagWithoutSpace);
             ingredientsTagSelect.push(tagWithoutSpace);
-            //console.log(ingredientsTagSelect)
             buildTags (tagsBar, el.textContent, "ingredients");
             recipesMatch = searchByIngTags(recipesMatch, ingredientsTagSelect);
-            //console.log(recipesMatch);
             closeDropdownAll ()
             displayRecipes (recipesMatch);
             ingDisplay (recipesMatch);

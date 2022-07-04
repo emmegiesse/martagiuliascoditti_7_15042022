@@ -5,12 +5,10 @@ let ustensilsTagSelect = [];
 function ustDisplay (recipesOn) {
     let ustMatch = getUstensils(recipesOn); // crée un tableau avec les appareils
     ustensilsListDOM(ustMatch); // crée il dropdown des appareils
-    //console.log(ustMatch); 
 }
 
 //Function pour récupère les ustensils des recettes
 function getUstensils(recipes) {
-    //console.log(recipes);
     let ustensils = [];
     recipes.forEach((recipe) => {
         recipe.ustensils.forEach((ustensil) => {
@@ -18,13 +16,11 @@ function getUstensils(recipes) {
             ustensils.push(ustensil);
         });
     });
-    //console.log(ustensils);
 return ustensils;
 }
 
 // récupère les ustensils et crée les éléments du dropdown
 function ustensilsListDOM (ustensils) {
-    //console.log(ustensils)
     ustList.style.display = "none";
     let ul = document.createElement("ul");
     ul.setAttribute("class","listUst");
@@ -35,8 +31,6 @@ function ustensilsListDOM (ustensils) {
     if (ustensilsTagSelect.length > 0) {
         ustensils = ustensils.filter((el) => !ustensilsTagSelect.includes(el.replace(/\s/g,"")))
     }
-    //console.log(ustensils);
-    //console.log(ustensilsTagSelect);
 
     ustensils.forEach((ustensil) => {
         let listUstensils = document.createElement("li");
@@ -48,17 +42,12 @@ function ustensilsListDOM (ustensils) {
 
     const btnUstensils = document.getElementsByClassName ("ustChoiseListToTag");        
     const arrayBtnUstensils = Array.from(btnUstensils);
-    //console.log(Array.from(btnUstensils))
     arrayBtnUstensils.forEach ((el)=> {
-        //console.log(el.textContent)
         el.onclick = () => {
             let tagWithoutSpace = el.textContent.replace(/\s/g,"");
-            //console.log(tagWithoutSpace);
             ustensilsTagSelect.push(tagWithoutSpace);
-            //console.log(ustensilsTagSelect)
             buildTags (tagsBar, el.textContent, "ustensils");
             recipesMatch = searchByUstTags(recipesMatch, ustensilsTagSelect);
-            //console.log(recipesMatch);
             closeDropdownAll ()
             displayRecipes (recipesMatch);
             ingDisplay (recipesMatch);
