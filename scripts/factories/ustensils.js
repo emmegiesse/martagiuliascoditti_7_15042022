@@ -24,11 +24,19 @@ return ustensils;
 
 // récupère les ustensils et crée les éléments du dropdown
 function ustensilsListDOM (ustensils) {
+    //console.log(ustensils)
     ustList.style.display = "none";
     let ul = document.createElement("ul");
     ul.setAttribute("class","listUst");
     ustList.innerHTML = "";
     ustList.appendChild(ul); 
+
+    // ne crée pas les éléments du dropdpwn si le tag a été selectionné
+    if (ustensilsTagSelect.length > 0) {
+        ustensils = ustensils.filter((el) => !ustensilsTagSelect.includes(el.replace(/\s/g,"")))
+    }
+    //console.log(ustensils);
+    //console.log(ustensilsTagSelect);
 
     ustensils.forEach((ustensil) => {
         let listUstensils = document.createElement("li");
@@ -41,7 +49,6 @@ function ustensilsListDOM (ustensils) {
     const btnUstensils = document.getElementsByClassName ("ustChoiseListToTag");        
     const arrayBtnUstensils = Array.from(btnUstensils);
     //console.log(Array.from(btnUstensils))
-
     arrayBtnUstensils.forEach ((el)=> {
         //console.log(el.textContent)
         el.onclick = () => {
@@ -50,9 +57,13 @@ function ustensilsListDOM (ustensils) {
             ustensilsTagSelect.push(tagWithoutSpace);
             //console.log(ustensilsTagSelect)
             buildTags (tagsBar, el.textContent, "ustensils");
-            //recipesMatch = searchByUstTags(recipesMatch, ustensilsTagSelect);
+            recipesMatch = searchByUstTags(recipesMatch, ustensilsTagSelect);
             //console.log(recipesMatch);
+            closeDropdownAll ()
             displayRecipes (recipesMatch);
+            ingDisplay (recipesMatch);
+            appDisplay (recipesMatch);
+            ustDisplay (recipesMatch);
         }
     })
     return recipesMatch;

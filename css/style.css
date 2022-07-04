@@ -45,7 +45,6 @@ header img {
     border: none;
     font-size: 18px;
     font-weight: 700;
-    background-color: #E7E7E7;
     color: black;
     position: relative;
     cursor: pointer;
@@ -66,6 +65,13 @@ header img {
     background-color: transparent;
 }
 
+/* mise en forme du message d'erreur*/
+.alertMessage {
+    display: none;
+    color: red;
+
+}
+
 /* mise en forme des dropdown*/
 .filterSection {
     display: flex;
@@ -73,7 +79,7 @@ header img {
     width: 100%;
     gap: 20px;
     z-index: 1;
-    position: relative;
+    position: absolute;
     margin-top: 20px;
 }
 
@@ -126,7 +132,7 @@ header img {
     flex-flow: row wrap;
     justify-content:space-between;
     list-style-type: none;
-    margin: 0;
+    margin-bottom: 20px;
     padding-left: 15px;
     padding-right: 15px;
 }
@@ -223,9 +229,8 @@ input {
 	display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 50px;
-    margin-top: 20px;
+    margin-top: 120px;
     width: 100%;
-    margin-top: 20px;
     box-sizing: content-box;
 }
 
@@ -292,9 +297,9 @@ input {
 
 .recipeMethod {
     width: 55%;
+    height: 80%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 7;
     overflow: hidden;
 }
-

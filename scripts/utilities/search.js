@@ -29,7 +29,7 @@ const appInputFilter = document.getElementById("inputAppliances");
 const ustInputFilter = document.getElementById("inputUstensils");
 
 function searchInputFilters (filter, input) {
-    let filterMatch = []; // tableau des ingredients, ustensils et appreils filtrés 
+        let filterMatch = []; // tableau des ingredients, ustensils et appreils filtrés 
     //console.log(filter)
     filter.forEach (elt => {
         //console.log(elt)
@@ -42,12 +42,12 @@ function searchInputFilters (filter, input) {
 }
 
 function searchInput() {
-    // recherche filtre ingredients
-    ingInputFilter.onchange = function (event) { 
+    
+    ingInputFilter.onchange = function (event) { // recherche filtre ingredients
         let ingSearch = event.target.value;
         //console.log(event.target.value);
         let ingredientsMatch; 
-        if (ingSearch.length > 2) {
+        if (ingSearch.length > 3) {
             ingredientsMatch = getIngredients(recipesMatch); 
             let ingFilterMatch = searchInputFilters(ingredientsMatch, ingSearch);
             ingredientsListDOM(ingFilterMatch)
@@ -57,9 +57,9 @@ function searchInput() {
             ingDisplay(recipesMatch);
         }   
             openDropdown(event)
-     }
-    // recherche filtre appareils
-    appInputFilter.onchange = function (event) { 
+    }
+     
+    appInputFilter.onchange = function (event) { // recherche filtre appareils
         let appSearch = event.target.value;
         //console.log(event.target.value);
         let appliancesMatch; 
@@ -73,10 +73,9 @@ function searchInput() {
             //console.log(appFilterMatch)
             appliancesListDOM(appFilterMatch)
             openDropdown(event)
-     }
+    }
 
-    // recherche filtre ustensils
-    ustInputFilter.onchange = function (event) { 
+    ustInputFilter.onchange = function (event) { // recherche filtre ustensils
         let ustSearch = event.target.value;
         //console.log(event.target.value);
         let ustensilsMatch; 
@@ -90,33 +89,69 @@ function searchInput() {
             //console.log(ustFilterMatch)
             ustensilsListDOM(ustFilterMatch)
             openDropdown(event)
-     }
+    }
 }
 
-// recherche pour tag des ingredients 
-function searchByIngTags(recipes, tagIng) {
+// Fucntions de recherche des tags 
+function searchByIngTags(recipes, tagIng) { // recherche pour tag des ingredients 
+    //console.log("test")
     let resultIng = [];
-    for (let i = 0; i < recipes.length; i++) {
-        //console.log(recipes[i].ingredients)
-        let currentIngredients = recipes[i].ingredients;
-        let numbers = 0;
-        currentIngredients.forEach(
-            ing => {
+    if (tagIng.length>0) {
+        for (let i = 0; i < recipes.length; i++) {
+            //console.log(recipes[i].ingredients)
+            let currentIngredients = recipes[i].ingredients;
+            let numbers = 0;
+            currentIngredients.forEach(ing => {
                 let currentIng = ing.ingredient.replace(/\s/g,"");
                 if (tagIng.includes(currentIng))
-                    {numbers++;}
-                })
-                if (numbers == tagIng.length)
-                    {resultIng.push(recipes[i])}
-                }; 
-                console.log(resultIng)
-                console.log(recipes)
-                console.log(tagIng)
-                return resultIng;
-            }
-            
-            
-            
-            
-            
-            
+                {numbers++;}
+            })
+            if (numbers == tagIng.length)
+            {resultIng.push(recipes[i])}
+        }; 
+    } else {
+        //console.log(recipes)
+        resultIng = recipes
+    }
+    //console.log(resultIng)
+    //console.log(recipes)
+    //console.log(tagIng)
+return resultIng;
+}
+
+function searchByAppTags(recipes, tagApp) { //recherche pour tag appareils
+    let resultApp = [];
+    for (let i = 0; i < recipes.length; i++) {
+        //console.log(recipes[i].appliances)
+        let currentAppliance = recipes[i].appliance;
+        let numbers = 0;
+        if (tagApp.includes(currentAppliance))
+            {numbers++;}
+        if (numbers == tagApp.length)
+        {resultApp.push(recipes[i])}
+    }; 
+    //console.log(resultApp)
+    //console.log(recipes)
+    //console.log(tagApp)
+return resultApp;
+}
+
+function searchByUstTags(recipes, tagUst) {  // recherche pour tag des ustensils
+    let resultUst = [];
+    for (let i = 0; i < recipes.length; i++) {
+        //console.log(recipes[i].ustensils)
+        let currentUstensils = recipes[i].ustensils;
+        let numbers = 0;
+        currentUstensils.forEach(ust => {
+            let currentUst = ust.replace(/\s/g,"");
+            if (tagUst.includes(currentUst))
+            {numbers++;}
+        })
+        if (numbers == tagUst.length)
+        {resultUst.push(recipes[i])}
+    }; 
+    //console.log(resultUst)
+    //console.log(recipes)
+    //console.log(tagUst)
+return resultUst;
+}
