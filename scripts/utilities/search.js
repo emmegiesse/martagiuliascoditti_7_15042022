@@ -1,13 +1,10 @@
 // Définition de la fonction search dans la barre principale 
 function mainSearch (recipes, input) {
     let recipesMatch = []; // tableau des recettes filtrées
-    for (let i = 0; i < recipes.length; i++) { // Recherche dans nom , description, ingredient
+    
+    for (let i = 0; i < recipes.length; i++) { // Recherche dans nom , description, ingredient // ALGO 1
         if (recipes[i].name.toLowerCase().includes(input.toLowerCase())
         ||recipes[i].description.toLowerCase().includes(input.toLowerCase()))
-        //||recipes[i].ingredients.some(elt => elt.ingredient.toLowerCase().includes(word))) 
-        /*const result = recipes.filter((recipe) => recipe.name.toLowerCase().includes(inputElement)
-        || recipe.description.toLowerCase().includes(inputElement)
-        || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(inputElement))*/
         {recipesMatch.push(recipes[i])}
         else {
             let isAdded = false;
