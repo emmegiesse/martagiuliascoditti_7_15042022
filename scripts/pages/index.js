@@ -11,14 +11,16 @@ function init() {
     mainSearchInput.addEventListener("input",() => {
         const inputMain = mainSearchInput.value;
 
-        if (inputMain.length >= 3) { // demarre la recherche après 3 caractères
+        if (inputMain.length >= 2) { // demarre la recherche après 3 caractères
             alert.style.display ='none';
             recipesSection.innerHTML = "";
             recipesMatch = mainSearch (recipes, inputMain); 
             if(recipesMatch == 0) {
                 alert.style.display ="block";
                 alert.textContent = 'Aucune recette ne correspond à votre critère...vous pouvez chercher "tarte aux pommes", "poisson" etc.';
-              }
+                displayRecipes(recipes);
+                recipesMatch = recipes; // affiche toutes les recettes
+            }
             else{
                 displayRecipes(recipesMatch); // affiche les recettes filtrées avec l"input dans la barre principale
             }
