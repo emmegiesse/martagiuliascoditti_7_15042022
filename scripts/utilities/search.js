@@ -1,24 +1,13 @@
 // Définition de la fonction search dans la barre principale 
 function mainSearch (recipes, input) {
-    let recipesMatch = []; // tableau des recettes filtrées
-    for (let i = 0; i < recipes.length; i++) { // Recherche dans nom , description, ingredient
-        if (recipes[i].name.toLowerCase().includes(input.toLowerCase())
-        ||recipes[i].description.toLowerCase().includes(input.toLowerCase()))
-        //||recipes[i].ingredients.some(elt => elt.ingredient.toLowerCase().includes(word))) 
-        /*const result = recipes.filter((recipe) => recipe.name.toLowerCase().includes(inputElement)
-        || recipe.description.toLowerCase().includes(inputElement)
-        || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(inputElement))*/
-        {recipesMatch.push(recipes[i])}
-        else {
-            let isAdded = false;
-            for (let j=0; j < recipes[i].ingredients.length ; j++){
-                if (recipes[i].ingredients[j].ingredient.toLowerCase().includes(input.toLowerCase())&&isAdded==false){
-                    isAdded = true;
-                    recipesMatch.push(recipes[i])
-                }
-            }
-        }
-    }
+    let recipesMatch = []; // tableau des recettes filtrées // ALGO-2
+
+    recipes.forEach ((recipe) => {
+        if(normalizeText(recipe.name).includes(normalizeText(input))
+        ||normalizeText(recipe.description).includes(normalizeText(input))
+        ||recipe.ingredients.some(item => normalizeText(item.ingredient).includes(normalizeText(input)))) 
+        {recipesMatch.push(recipe)}
+    });
     return recipesMatch;
 };
 
