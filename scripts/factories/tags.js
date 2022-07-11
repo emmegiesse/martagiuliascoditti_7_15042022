@@ -26,7 +26,7 @@ function buildTags(elt, tag, collection) { // function de construction du tag
                 appliancesTagSelect.splice(appliancesTagSelect.indexOf(onlyId),1);
             }
             else if (ustensilsTagSelect.indexOf(onlyId)>=0){    
-                appliancesTagSelect.splice(ustensilsTagSelect.indexOf(onlyId),1);
+                ustensilsTagSelect.splice(ustensilsTagSelect.indexOf(onlyId),1);
             }
             
             recipesMatch = recipes;
